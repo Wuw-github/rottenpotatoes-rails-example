@@ -1,11 +1,11 @@
 class Movie < ActiveRecord::Base
 
-    def Movie.all_ratings
+    def self.all_ratings
         return ['G', 'PG', 'PG-13', 'R']
     end
 
     def self.with_ratings(rating_list)
-        if rating_list == nil
+        if rating_list == nil or rating_list.empty?
             return Movie.all
         end
         ret = []

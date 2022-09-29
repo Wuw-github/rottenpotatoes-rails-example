@@ -3,7 +3,7 @@
 
 <%#  Part 1: Start here... %>
 
-<%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
+<%= form_tag movies_path(sort: @sort), method: :get, id: 'ratings_form' do %>
   Include:
   <% @all_ratings.each do |rating| %>
     <div class="form-check  form-check-inline">
@@ -15,11 +15,19 @@
 <% end %>
 
 <table class="table table-striped col-md-12" id="movies">
+  <% temp_hash = Hash.new %>
+  <% @ratings_to_show.each do |rate| %>
+    <% temp_hash[rate] = "1" %>
+  <% end %>
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th class="<%= 'bg-warning hilite' if @sort == 'title'%>">
+        <%= link_to "Movie Title", movies_path(ratings: temp_hash, :sort => "title"), :id => "title_header"%>
+      </th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th class="<%= 'bg-warning hilite' if @sort == 'release_date'%>">
+        <%= link_to "Release Date", movies_path(ratings: temp_hash, :sort => "release_date"), :id => "release_date_header" %>
+      </th>
       <th>More Info</th>
     </tr>
   </thead>
