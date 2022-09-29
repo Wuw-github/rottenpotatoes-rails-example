@@ -3,7 +3,8 @@
 
 <%#  Part 1: Start here... %>
 
-<%= form_tag movies_path(sort: @sort), method: :get, id: 'ratings_form' do %>
+<%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
+  <%= hidden_field_tag 'sort', @sort %>
   Include:
   <% @all_ratings.each do |rating| %>
     <div class="form-check  form-check-inline">
